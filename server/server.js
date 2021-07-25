@@ -1,6 +1,6 @@
 import path from 'path'
 import express from 'express'
-import { MongoClient } from 'mongodb'
+import mongoose from 'mongoose'
 import template from './../template'
 //comment out before building for production
 import devBundle from './devBundle'
@@ -24,10 +24,16 @@ app.listen(port, function onStart(err) {
   console.info('Server started on port %s.', port)
 })
 
-// Database Connection URL
-const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/mernSimpleSetup'
-// Use connect method to connect to the server
-MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true },(err, db)=>{
-  console.log("Connected successfully to mongodb server")
-  db.close()
+
+//Setting up mongodb connection with mongoose
+mongoose.Promise = global.Promise
+mongoose.connect(config.mongoUri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
 })
+mongoose.connection.on('error', () => {
+  throw new Error(`unable to connect to database: ${mongoUri}`)
+})
+
+
