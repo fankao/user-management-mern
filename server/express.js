@@ -14,6 +14,7 @@ app.use(compress())
 app.use(helmet())
 app.use(cors())
 app.use('/', auth)
+//Auth error handling for express-jwt
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
         res.status(401).json({ "error": err.name + ": " + err.message })
