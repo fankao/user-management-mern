@@ -8,8 +8,8 @@ export default () => {
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         </head>
         <body>
-          <div id="root"></div>
-          <script type="text/javascript" src="/dist/bundle.js"></script>
+          <div id="root">${markup}</div>
+          <style id="jss-server-side">${css}</style>
         </body>
       </html>`
 }
