@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser'
 import compress from 'compression'
 import cors from 'cors'
 import helmet from 'helmet'
-import Template from './../template'
+import template from './../template'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 
@@ -28,6 +28,10 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 // mount routes
 app.use('/', userRoutes)
 app.use('/', authRoutes)
+
+app.get('/', (req, res) => {
+    res.status(200).send(template())
+})
 
 //Auth error handling for express-jwt
 app.use((err, req, res, next) => {
