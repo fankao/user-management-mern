@@ -2,6 +2,7 @@ import path from 'path'
 import express from 'express'
 import mongoose from 'mongoose'
 import template from './../template'
+import config from './../config/config';
 //comment out before building for production
 import devBundle from './devBundle'
 
